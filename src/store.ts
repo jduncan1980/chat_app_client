@@ -3,9 +3,12 @@ import {
 	configureStore,
 	getDefaultMiddleware,
 } from '@reduxjs/toolkit';
+import userSlice from './reduxSlices/userSlice';
 import logger from 'redux-logger';
 
-const reducer = combineReducers({});
+const reducer = combineReducers({
+	user: userSlice,
+});
 const store = configureStore({
 	reducer,
 	middleware: [...getDefaultMiddleware(), logger],

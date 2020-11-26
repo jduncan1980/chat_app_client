@@ -4,14 +4,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import store from './store';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<CssBaseline />
-			<App />
-		</Provider>
+		<Router>
+			<Provider store={store}>
+				<CssBaseline />
+				<App />
+			</Provider>
+		</Router>
 	</React.StrictMode>,
 	document.getElementById('root')
 );

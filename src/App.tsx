@@ -3,6 +3,8 @@ import React from 'react';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
+import { Route } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -18,9 +20,9 @@ function App(): React.ReactElement {
 	const classes = useStyles();
 	return (
 		<Container className={classes.root} id='App'>
-			{/* <Dashboard /> */}
-			<Register />
-			{/* <Login /> */}
+			<Route exact path='/' component={Login} />
+			<Route exact path='/register' component={Register} />
+			<PrivateRoute exact path='/dashboard' component={Dashboard} />
 		</Container>
 	);
 }

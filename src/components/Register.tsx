@@ -8,7 +8,9 @@ import {
 	Typography,
 } from '@material-ui/core';
 import Line from './Line';
-import axios from 'axios';
+import { registerUser } from '../reduxSlices/userSlice';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -39,22 +41,22 @@ type FormData = {
 	last_name: string;
 	email: string;
 };
-const URL = process.env.REACT_APP_SERVER;
+// const URL = process.env.REACT_APP_SERVER;
 
 export default function Register(): React.ReactElement {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const history = useHistory();
+
 	const { register, handleSubmit, formState } = useForm<FormData>({
 		mode: 'onChange',
 	});
+
 	const onSubmit: SubmitHandler<FormData> = async (data) => {
-		try {
-			console.log(URL);
-			const response = await axios.post(`${URL}/api/auth/register`, data);
-			console.log(response);
-		} catch (error) {
-			alert(`Something went wrong... /* ${error} */`);
-		}
+		await dispatch(registerUser(data));
+		history.push('/');
 	};
+
 	return (
 		<Box
 			component='form'

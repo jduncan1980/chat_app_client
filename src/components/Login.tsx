@@ -8,6 +8,9 @@ import {
 	Typography,
 } from '@material-ui/core';
 import Line from './Line';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../reduxSlices/userSlice';
+import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -36,12 +39,22 @@ type FormData = {
 	password: string;
 };
 
+// const URL = process.env.REACT_APP_SERVER;
+
 export default function Login(): React.ReactElement {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const history = useHistory();
+
 	const { register, handleSubmit, formState } = useForm<FormData>({
 		mode: 'onChange',
 	});
-	const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+
+	const onSubmit: SubmitHandler<FormData> = async (data) => {
+		await dispatch(loginUser(data));
+		history.push('/dashboard');
+	};
+
 	return (
 		<Box
 			component='form'
@@ -83,6 +96,11 @@ export default function Login(): React.ReactElement {
 				Login
 			</Button>
 			<Line />
+			<Link to='/register' style={{ textDecoration: 'none' }}>
+				<Typography variant='h5' color='primary'>
+					Not Signed Up?
+				</Typography>
+			</Link>
 		</Box>
 	);
 }
