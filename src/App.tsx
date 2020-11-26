@@ -1,26 +1,28 @@
+import { Container, makeStyles } from '@material-ui/core';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Dashboard from './components/Dashboard';
+import Login from './components/Login';
+import Register from './components/Register';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: '100%',
+		minHeight: '100vh',
+	},
+}));
+function App(): React.ReactElement {
+	const classes = useStyles();
+	return (
+		<Container className={classes.root} id='App'>
+			{/* <Dashboard /> */}
+			<Register />
+			{/* <Login /> */}
+		</Container>
+	);
 }
 
 export default App;
