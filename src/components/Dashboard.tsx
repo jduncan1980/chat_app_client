@@ -3,6 +3,11 @@ import { makeStyles, Box } from '@material-ui/core';
 import Title from './Title';
 import MessageBar from './MessageBar';
 import ChatRoomMessages from './ChatRoomMessages';
+import io from 'socket.io-client';
+
+const SERVER = process.env.CHAT_SERVER || 'https://localhost:5000';
+const socket = io(SERVER);
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'grid',
@@ -12,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard(): React.ReactElement {
 	const classes = useStyles();
+	socket.on('connection', () => {
+		console.log('Connected!');
+	});
 
 	return (
 		<div className={classes.root}>
